@@ -1,0 +1,27 @@
+{
+    "name": "Sdarot Auto Player",
+    "action": {},
+    "manifest_version": 3,
+    "version": "1.0.0",
+    "description": "Auto play sdarot episodes",
+    "permissions": [
+      "tabs",
+      "scripting",
+      "webNavigation"
+    ],
+    "background": {
+      "service_worker": "background.js"
+    },
+    "icons": {
+        "16": "assets/icons/icon.png",
+        "32": "assets/icons/icon-32.png",
+        "48": "assets/icons/icon-48.png",
+        "64": "assets/icons/icon-64.png",
+        "96": "assets/icons/icon-96.png",
+        "128": "assets/icons/icon-128.png",
+        "256": "assets/icons/icon-256.png"
+    },
+    "host_permissions": [
+      "https://*.sdarot.buzz/"
+    ]
+  }
