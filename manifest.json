@@ -1,13 +1,14 @@
 {
     "name": "Sdarot Auto Player",
-    "action": {},
+    "action": {"default_popup": "popup.html"},
     "manifest_version": 3,
     "version": "1.0.0",
     "description": "Auto play sdarot episodes",
     "permissions": [
       "tabs",
       "scripting",
-      "webNavigation"
+      "webNavigation",
+      "storage"
     ],
     "background": {
       "service_worker": "background.js"
@@ -22,6 +23,8 @@
         "256": "assets/icons/icon-256.png"
     },
     "host_permissions": [
-      "https://*.sdarot.buzz/"
+      "https://*.sdarot.buzz/",
+      "https://*.sdarot.work/",
+      "https://*.sdarot.tv/"
     ]
   }

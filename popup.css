@@ -1,0 +1,102 @@
+.container {
+    padding: 10px;
+    font-family: 'Poppins', sans-serif;
+    width: 200px;
+}
+
+.form {
+    height: 120px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.form-group {
+    position: relative;
+}
+
+.form-field {
+    font-family: inherit;
+    width: 100%;
+    border: 0;
+    border-bottom: 2px solid #9b9b9b;
+    outline: 0;
+    font-size: 0.8rem;
+    padding: 7px 0;
+    background: transparent;
+    transition: border-color 0.2s;
+}
+
+.form-field:focus {
+    padding-bottom: 6px;
+    font-weight: 700;
+    border-width: 3px;
+    border-image: linear-gradient(to right, #11998e, #38ef7d);
+    border-image-slice: 1;
+}
+
+.form-field:required, .form-field:invalid {
+    box-shadow: none;
+}
+
+.save-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.save-button {
+    background-color: #EA4C89;
+    border-radius: 8px;
+    border-style: none;
+    box-sizing: border-box;
+    color: #FFFFFF;
+    cursor: pointer;
+    display: inline-block;
+    font-family: "Haas Grot Text R Web", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    height: 30px;
+    line-height: 20px;
+    list-style: none;
+    margin: 0;
+    outline: none;
+    padding: 0px 16px;
+    position: relative;
+    text-align: center;
+    text-decoration: none;
+    transition: color 100ms;
+    vertical-align: baseline;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+  }
+  
+  .save-button:hover,
+  .save-button:focus {
+    background-color: #F082AC;
+  }
+
+  .popup-fade {
+    animation: fade 1s forwards;
+    font-family: 'Poppins', sans-serif;
+    font-weight: bold;
+  }
+
+  .hidden {
+    opacity: 0;
+  }
+
+  @keyframes fade {
+    0%   {opacity: 0;}
+    12.5%  {opacity: 0.25;}
+    25%  {opacity: 0.5;}
+    37.5%  {opacity: 0.75;}
+    50%  {opacity: 1;}
+    62.5%  {opacity: 0.75;}
+    75%  {opacity: 0.5;}
+    87.5%  {opacity: 0.25;}
+    100% {opacity: 0;}
+  }
