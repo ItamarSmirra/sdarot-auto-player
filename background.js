@@ -1,52 +1,23 @@
-import * as consts from "/consts.js";
-import * as helpers from "/helpers.js";
-import * as locators from "/locators.js";
+import core from './src/core.js'
 
-function sdarotAutoPlay() {
-    const currentVersion = "1.1.0";
-    const probingTimeout = 1000;
-    let probCount = 0;
-    let logging = false;
+try {
+    console.log('background wrapper started')
 
-    console.log(`Sdarot Auto Play version ${currentVersion} is Enabled`);
+    chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
+        console.log('tab updated, initializing autoplay');
+        core.initSdarotAutoplay(tabId, changeInfo)
+    })
 
-    const interval = setInterval(async () => {
-        console.log(`Searching for errors. Probing count is ${probCount}`)
-        if (locators.IsNotLoggedErrorVisible()) {
-            console.log('Found user logging error, logging in...');
-            const [sdarotUsername, sdarotPassword] = helpers.getStoredCredentials([consts.SDAROT_USERNAME_KEY, consts.SDAROT_PASSWORD_KEY]);
-
-            if (!logging && sdarotPassword && sdarotUsername) {
-                helpers.login(sdarotUsername, sdarotPassword);
-                logging = true;
-            }
-            clearInterval(interval);
-        } else if (locators.IsServerErrorVisible()) {
-            console.log('Found server loading error, reloading...');
-            window.location.reload();
-        } else {
-            if (locators.IsSpinnerVisible()) {
-                locators.GetEpisodeToPlay().click();
-                await helpers.sleep();
-
-                locators.GetPlayBtn().click();
-                await helpers.sleep();
-
-                locators.GetExpandViewBtn().click();
-
-                clearInterval(interval);
-            }
-        }
-    }, probingTimeout)
+    chrome.webNavigation.onCommitted.addListener((details) => {
+        console.log('url changed, initializing autoplay');
+        core.initSdarotAutoplay(details.tabId, details)
+    }, {
+        url: [
+            {
+                hostContains: 'sdarot'
+            },
+        ]
+    })
+} catch (e) {
+    console.error(e);
 }
-
-function initSdarotAutoplay(tabId, info) {
-    if (info.url?.includes('episode')) {
-        chrome.scripting.executeScript({
-            target: {tabId: tabId, allFrames: true},
-            func: sdarotAutoPlay,
-        });
-    }
-}
-
-export {initSdarotAutoplay}

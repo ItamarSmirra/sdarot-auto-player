@@ -1,20 +1,14 @@
-function getStoredCredentials(keys) {
+export const getStoredCredentials = (keys) => {
     console.log(`Getting values for keys: ${JSON.stringify(keys)}`);
 
-    const values = [];
-    for (const key in keys){
-        values.push(new Promise((res) => {
-            chrome.storage.sync.get(key, (result) => {
-                res(values.push(result));
-            });
-        }))
-    }
-    
-
-    return values
+    return keys.map(key => new Promise((res) => {
+        chrome.storage.sync.get(key, (result) => {
+            res(result);
+        });
+    }));
 }
 
-function sleep(milliseconds = 1500) {
+export const sleep = (milliseconds = 1500) => {
     return new Promise((res) => {
         setTimeout(() => {
             res();
@@ -22,7 +16,7 @@ function sleep(milliseconds = 1500) {
     })
 }
 
-function login(username, password) {
+export const login = (username, password) => {
     fetch("https://sdarot.buzz/login", {
         "headers": {
             "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9",
@@ -51,5 +45,3 @@ function login(username, password) {
         console.error('Error while trying to log in');
     });
 }
-
-export {getStoredCredentials, sleep, login};
