@@ -1,30 +1,35 @@
 {
-    "name": "Sdarot Auto Player",
-    "action": {"default_popup": "popup.html"},
-    "manifest_version": 3,
-    "version": "1.0.0",
-    "description": "Auto play sdarot episodes",
-    "permissions": [
-      "tabs",
-      "scripting",
-      "webNavigation",
-      "storage"
-    ],
-    "background": {
-      "service_worker": "background.js"
-    },
-    "icons": {
-        "16": "assets/icons/icon.png",
-        "32": "assets/icons/icon-32.png",
-        "48": "assets/icons/icon-48.png",
-        "64": "assets/icons/icon-64.png",
-        "96": "assets/icons/icon-96.png",
-        "128": "assets/icons/icon-128.png",
-        "256": "assets/icons/icon-256.png"
-    },
-    "host_permissions": [
-      "https://*.sdarot.buzz/",
-      "https://*.sdarot.work/",
-      "https://*.sdarot.tv/"
-    ]
-  }
+  "name": "Sdarot Auto Player",
+  "action": {
+    "default_popup": "src/popup/popup.html"
+  },
+  "manifest_version": 3,
+  "version": "1.1.0",
+  "description": "Auto play sdarot episodes",
+  "permissions": [
+    "tabs",
+    "scripting",
+    "webNavigation",
+    "storage"
+  ],
+  "minimum_chrome_version": "93",
+  "background": {
+    "service_worker": "background.js",
+    "type": "module"
+  },
+  "icons": {
+    "16": "assets/icons/icon.png",
+    "32": "assets/icons/icon-32.png",
+    "48": "assets/icons/icon-48.png",
+    "64": "assets/icons/icon-64.png",
+    "96": "assets/icons/icon-96.png",
+    "128": "assets/icons/icon-128.png",
+    "256": "assets/icons/icon-256.png"
+  },
+  "host_permissions": [
+    "https://*.sdarot.buzz/",
+    "https://*.sdarot.work/",
+    "https://*.sdarot.tv/",
+    "https://*.sdarot.tw/"
+  ]
+}
