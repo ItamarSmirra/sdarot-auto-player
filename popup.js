@@ -1,35 +1,13 @@
-const SDAROT_USERNAME_KEY = 'sdarotUsername';
-const SDAROT_PASSWORD_KEY = 'sdarotPassword';
+import * as consts from "/consts.js";
+import * as helpers from "/helpers.js";
 
-const getSdarotCredentials = (key) => new Promise((res) => {
-    chrome.storage.sync.get([key], (result) => {
-        res(result[key]);
-    });
-})
+function loadCredentials() {
+    const [sdarotUsername, sdarotPassword] = helpers.getStoredCredentials([consts.SDAROT_USERNAME_KEY, consts.SDAROT_PASSWORD_KEY]);
 
-const onSave = () => {
-    const username = document.getElementById("sdarot-auto-username").value;
-    if (username) {
-        chrome.storage.sync.set({ sdarotUsername: username });
-    }
-
-    const password = document.getElementById("sdarot-auto-password").value;
-    if (password) {
-        chrome.storage.sync.set({ sdarotPassword: password });
-    }
-
-    const popup = document.getElementById('save-popup');
-    popup.classList.remove('hidden');
-    popup.classList.add('popup-fade');
-}
-
-document.addEventListener('DOMContentLoaded', async () => {
-    const sdarotUsername = await getSdarotCredentials(SDAROT_USERNAME_KEY);
     if (sdarotUsername) {
         document.getElementById("sdarot-auto-username").value = sdarotUsername;
     }
 
-    const sdarotPassword = await getSdarotCredentials(SDAROT_PASSWORD_KEY);
     if (sdarotPassword) {
         document.getElementById("sdarot-auto-password").value = sdarotPassword;
     }
@@ -42,4 +20,23 @@ document.addEventListener('DOMContentLoaded', async () => {
         popup.classList.add('hidden');
         popup.classList.remove('popup-fade');
     })
-})
+}
+
+
+const onSave = () => {
+    const username = document.getElementById("sdarot-auto-username").value;
+    if (username) {
+        chrome.storage.sync.set({sdarotUsername: username});
+    }
+
+    const password = document.getElementById("sdarot-auto-password").value;
+    if (password) {
+        chrome.storage.sync.set({sdarotPassword: password});
+    }
+
+    const popup = document.getElementById('save-popup');
+    popup.classList.remove('hidden');
+    popup.classList.add('popup-fade');
+}
+
+document.addEventListener('DOMContentLoaded', loadCredentials)
